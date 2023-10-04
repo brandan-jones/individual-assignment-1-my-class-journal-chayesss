@@ -26,10 +26,15 @@ class MyclassjournalApplicationTests {
      */
     @Test
     void verifyJournalEntryProperties() {
+        int id = 1;
         String notes =  "I am running a unit test";
         String date = "September 2021";
 
         JournalEntry journalEntry = new JournalEntry();
+
+        journalEntry.setId(id);
+        assertEquals(id, journalEntry.getId());
+
         journalEntry.setNotes(notes);
         assertEquals(notes, journalEntry.getNotes());
 
@@ -42,10 +47,12 @@ class MyclassjournalApplicationTests {
      */
     @Test
     void verifyAddAndRemoveJournalEntries() {
+        int id = 2;
         String notes =  "My first entry!";
         String date = "October 2021";
 
         JournalEntry journalEntry = new JournalEntry();
+        journalEntry.setId(id);
         journalEntry.setNotes(notes);
         journalEntry.setDate(date);
 
@@ -54,7 +61,7 @@ class MyclassjournalApplicationTests {
         List<JournalEntry> journalEntries = journalService.fetchAll();
         boolean journalEntryPresent = false;
         for (JournalEntry je : journalEntries) {
-            if (je.getNotes().equals(notes) && je.getDate().equals(date)) {
+            if (je.getNotes().equals(notes) && je.getDate().equals(date) &&je.getId() == id) {
                 journalEntryPresent = true;
                 break;
             }
